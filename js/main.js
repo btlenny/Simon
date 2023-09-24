@@ -1,8 +1,5 @@
 // Constants:
-// - colors blocks
-// - start button
-// - win alert
-// - lose alert
+
 const startButton = document.querySelector('#start-button')
 
 const topL = document.getElementById('tl');
@@ -16,9 +13,6 @@ const tone3 = new Audio();
 const tone4 = new Audio();
 
 // Variables:
-// -level display
-// -sequence
-// -player selection
 
 let sequence = [];
 let playerSequence = [];
@@ -26,36 +20,62 @@ let level = 1;
 let audio = [];
 
 
-// Event Listeners:
-
-
-// Cached Elements:
-// -start button
-// -tiles
-// - sequence
-// - level display
-
 // Begin Sequence:
 // 1a. Start button disapears after click and Level appears
 function startGame(){
     startButton.classList.add('hidden');
     const levelDisplay = document.querySelector('h2');
-    levelDisplay.style.display = 'block';
+    levelDisplay.style.visibility = 'visible';
+    //start round
 }
 startButton.addEventListener('click', startGame);
-// 1b. update
-function nextRound() {
-    level += 1;
 
-    const nextSequence = [...sequence]
-}
+// 1b. start sequence
+function addToSequence() {
+    const tiles = [topL, topR, bottomL, bottomR]; // Array of your tiles
+    const randomIndex = Math.floor(Math.random() * 4); // Generate a random index (0-3)
+    const randomTile = tiles[randomIndex]; // Get a random tile
+    sequence.push(randomTile); // Add the random tile to the sequence
+  }
+  
+  // Function to display the sequence to the player
+  function displaySequence() {
+    for (let i = 0; i < sequence.length; i++) {
+      const tile = sequence[i];
+      setTimeout(() => {
+        // Highlight the tile and play a tone
+        highlightTile(tile);
+        playTone(tile);
+      }, i * 1000); // Display each tile for 1 second (adjust timing as needed)
+    }
+  }
+  
+  // Call these functions to start the game
+  function startRound() {
+    addToSequence();
+    displaySequence();
+  }
+  
 
-function nextStep(){
-    const tiles = ['tl', 'tr', 'bl', 'br'];
-    const random = tiles[Math.floor(Math.random() * tiles.lengthj)];
-    return random;
-}
+
 // 1b. The tile selected will light up and animate
+
+
+// 1c. A tone will be heard to match with the corresponding color tile
+// 1d. The sequence will continue to add +1 random tile to the sequence everytime the player chooses correctly
+
+
+
+
+
+// Player Begin:
+// 2a Player will click a tile to match the sequence chose
+// 2b The tile selected will light up and animate
+// 2c A tone will be heard to match with the corresponding color tile
+
+// EndGame:
+// 3a If the player does not follow the sequence, the game will stop - or - If player does choose correctly the sequence should continue and add +1 random tile to the sequence until they’ve reached level 20.
+
 
 // TOP LEFT highlight when clicked
 
@@ -118,23 +138,6 @@ function changeColorBottomR() {
         brCell.style.transform = 'translateY(0px)'; 
     }, 300); 
 }
-
-// 1c. A tone will be heard to match with the corresponding color tile
-// 1d. The sequence will continue to add +1 random tile to the sequence everytime the player chooses correctly
-
-
-
-
-
-// Player Begin:
-// 2a Player will click a tile to match the sequence chose
-// 2b The tile selected will light up and animate
-// 2c A tone will be heard to match with the corresponding color tile
-
-// EndGame:
-// 3a If the player does not follow the sequence, the game will stop - or - If player does choose correctly the sequence should continue and add +1 random tile to the sequence until they’ve reached level 20.
-
-
 
 
 
