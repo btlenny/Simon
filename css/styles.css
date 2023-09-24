@@ -7,6 +7,15 @@ h1 {
     color:rgb(224, 204, 179)
 }
 
+h2 {
+  font-family: 'Zen Dots'; 
+    font-size: 20px;
+    margin-left: 190px;
+    margin-top:50px;
+    color:rgb(224, 204, 179);
+    display: none;
+}
+
 .board {
     display: grid;
     gap: 10px;
@@ -14,6 +23,9 @@ h1 {
     max-width: 300px;
     margin: 0 auto
    
+}
+.hidden {
+  display: none !important;
 }
 
 body {

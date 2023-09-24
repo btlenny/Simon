@@ -5,7 +5,6 @@
 // - lose alert
 const startButton = document.querySelector('#start-button')
 
-
 const topL = document.getElementById('tl');
 const topR = document.getElementById('tr');
 const bottomL= document.getElementById('bl');
@@ -16,8 +15,6 @@ const tone2 = new Audio();
 const tone3 = new Audio();
 const tone4 = new Audio();
 
-
-
 // Variables:
 // -level display
 // -sequence
@@ -25,8 +22,7 @@ const tone4 = new Audio();
 
 let sequence = [];
 let playerSequence = [];
-let initialLevel = 0;
-let levelCounter = 0;
+let level = 1;
 let audio = [];
 
 
@@ -40,8 +36,25 @@ let audio = [];
 // - level display
 
 // Begin Sequence:
-// 1a. After hitting the start button, the sequence will begin with a random selection of 1 or 4 tiles
+// 1a. Start button disapears after click and Level appears
+function startGame(){
+    startButton.classList.add('hidden');
+    const levelDisplay = document.querySelector('h2');
+    levelDisplay.style.display = 'block';
+}
+startButton.addEventListener('click', startGame);
+// 1b. update
+function nextRound() {
+    level += 1;
 
+    const nextSequence = [...sequence]
+}
+
+function nextStep(){
+    const tiles = ['tl', 'tr', 'bl', 'br'];
+    const random = tiles[Math.floor(Math.random() * tiles.lengthj)];
+    return random;
+}
 // 1b. The tile selected will light up and animate
 
 // TOP LEFT highlight when clicked
@@ -52,22 +65,27 @@ function changeColorTopL() {
   
     const tlCell = document.getElementById('tl');
     tlCell.style.boxShadow = '0 0 50px yellow';
+    tlCell.style.transform = 'translateY(5px)';
+   
 
     setTimeout(function () {
-        tlCell.style.boxShadow = '0 0 0 1px #ffb900 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)'; // Change the boxShadow property
-    }, 300); 
+        tlCell.style.boxShadow = '0 0 0 1px #ffb900 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)';
+        tlCell.style.transform = 'translateY(0px)';
+    }, 300);
 }
 
-//TOP RIGHT highlight when clicked
+// TOP RIGHT highlight when clicked
 topR.addEventListener('click', changeColorTopR);
 
 function changeColorTopR() {
    
     const trCell = document.getElementById('tr');
     trCell.style.boxShadow = '0 0 50px red';
+    trCell.style.transform = 'translateY(5px)';
 
     setTimeout(function () {
-        trCell.style.boxShadow = '0 0 0 1px rgb(179, 42, 34), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(179, 42, 34), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)'; // Change the boxShadow property
+        trCell.style.boxShadow = '0 0 0 1px rgb(179, 42, 34), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(179, 42, 34), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)';
+        trCell.style.transform = 'translateY(0px)';
     }, 300); 
 }
 
@@ -78,22 +96,26 @@ function changeColorBottomL() {
    
     const blCell = document.getElementById('bl');
     blCell.style.boxShadow = '0 0 50px chocolate';
+    blCell.style.transform = 'translateY(5px)';
 
     setTimeout(function () {
-        blCell.style.boxShadow = '0 0 0 1px rgb(255, 114, 52), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(255, 114, 52), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)'; // Change the boxShadow property
+        blCell.style.boxShadow = '0 0 0 1px rgb(255, 114, 52), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(255, 114, 52), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)'; 
+        blCell.style.transform = 'translateY(0px)';
     }, 300); 
 }
 
-//BOTTOM RIGHT highlight when clicked
+// BOTTOM RIGHT highlight when clicked
 bottomR.addEventListener('click', changeColorBottomR);
 
 function changeColorBottomR() {
     
     const brCell = document.getElementById('br');
     brCell.style.boxShadow = '0 0 50px blue';
+    brCell.style.transform = 'translateY(5px)';
 
     setTimeout(function () {
-        brCell.style.boxShadow = '0 0 0 1px rgb(36, 74, 181), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(36, 74, 181), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)'; // Change the boxShadow property
+        brCell.style.boxShadow = '0 0 0 1px rgb(36, 74, 181), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(36, 74, 181), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5)';
+        brCell.style.transform = 'translateY(0px)'; 
     }, 300); 
 }
 
