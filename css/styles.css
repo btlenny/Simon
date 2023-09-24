@@ -1,14 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 
-
-header {
-    font-family: 'Ramabhadra', bold; 
-    font-size: 40px;
+h1 {
+    font-family: 'Zen Dots'; 
+    font-size: 60px;
     text-align: center;
+    color:rgb(224, 204, 179)
+}
+
+.board {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 300px;
+    margin: 0 auto
+   
 }
 
 body {
 
-background-image: url(https://static.roland.com/products/rc_juno-60/images/juno-60_filter.png);
-background-position: ;
+ background-image: url();
+ background-color: rgb(36, 36, 36);
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-attachment: fixed;
+
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px;
+}
+
+button {
+    font-family: 'Zen Dots'; 
+    background-color:red;
+    box-shadow: 0 0 50px red;
+    border-radius: 5px;
+}
+
+.cell {
+    padding: 10px;
+    background-color: #ccc;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 4px ;
+}
+
+#tl{
+    background-color:rgb(244, 184, 62);
+    box-shadow: 0 0 0 1px #ffb900 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+#tr{
+    background-color:rgb(179, 42, 34);
+    box-shadow: 0 0 0 1px rgb(179, 42, 34), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(179, 42, 34), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+#bl{
+    background-color: rgb(255, 114, 52);
+    box-shadow: 0 0 0 1px rgb(255, 114, 52), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(255, 114, 52), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+#br{
+    background-color: rgb(36, 74, 181);
+    box-shadow: 0 0 0 1px  rgb(36, 74, 181), 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0  rgb(36, 74, 181), 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
