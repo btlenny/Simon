@@ -24,10 +24,6 @@ function playIntroSong() {
     introSong.play();
   }
   
-
-
-
-
 //START BUTTON
 // 1a. Start button disapears after click and Level appears
 startButton.addEventListener('click', startGame);
@@ -41,8 +37,6 @@ function startGame() {
         // playSequence(); // Start playing the sequence
       }, 5000); // Adjust the delay (in milliseconds) as needed for your intro song
     }
-
-
 
 //GENERATE SEQUENCE
 // Function to generate a random sequence
