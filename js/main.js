@@ -1,21 +1,14 @@
 // Constants:
-
 const startButton = document.querySelector('#start-button')
-
 const topL = document.getElementById('tl');
 const topR = document.getElementById('tr');
 const bottomL= document.getElementById('bl');
 const bottomR = document.getElementById('br');
 
-const tone1 = new Audio();
-const tone2 = new Audio();
-const tone3 = new Audio();
-const tone4 = new Audio();
-
 // Variables:
-
+let computerSequence = [];
 let playerSequence = [];
-let level = 1;
+let level = 0;
 let audio = [];
 
 // INTRO SONG
@@ -27,15 +20,17 @@ function playIntroSong() {
 //START BUTTON
 // 1a. Start button disapears after click and Level appears
 startButton.addEventListener('click', startGame);
+
 function startGame() {
-    startButton.classList.add('hidden'); //hide start button after click
-    const levelDisplay = document.querySelector('h2'); //show the level display
+    startButton.classList.add('hidden'); 
+    const levelDisplay = document.querySelector('h2'); 
     levelDisplay.style.visibility = 'visible'; 
     playIntroSong();
     setTimeout(() => {
-        generateSequence(); // Call the function to generate the initial sequence
-        // playSequence(); // Start playing the sequence
-      }, 5000); // Adjust the delay (in milliseconds) as needed for your intro song
+        generateSequence();
+        playSequence();
+        // Call the function to generate the initial sequence
+        }, 5000);
     }
 
 //GENERATE SEQUENCE
@@ -47,37 +42,59 @@ const computerTileEventListeners = [
     changeColorBottomR,
   ];
   
-  // Function to trigger a random event listener for the computer's sequence
-  function generateSequence() {
-    const randomIndex = Math.floor(Math.random() * computerTileEventListeners.length);
-    const generateSequence = computerTileEventListeners[randomIndex];
-    generateSequence();
-  }
+function generateSequence() {
+  const randomSequence = Math.floor(Math.random() * computerTileEventListeners.length);
+  // return computerTileEventListeners[randomIndex]();
+  computerSequence.push(randomSequence);
+  level++;
+  updateLevelDisplay();
+  return computerTileEventListeners[randomSequence]();
+}
+ 
+//UPDATE LEVEL
+function updateLevelDisplay() {
+  const levelDisplay = document.querySelector('h2');
+  levelDisplay.textContent = `Level: ${level} of 20`;
+}
+
+// PLAY SEQUENCE
+function playSequence() {
   
-  // Call the function to trigger a random event listener for the computer's sequence
-
-    // Implement playing the corresponding tone for the button
-    // You can set the audio source for each button in your HTML
+}
 
 
-
-// 1b. The tile selected will light up and animate
-
-
-// 1c. A tone will be heard to match with the corresponding color tile
 // 1d. The sequence will continue to add +1 random tile to the sequence everytime the player chooses correctly
-
-
-
+  
 
 
 // Player Begin:
 // 2a Player will click a tile to match the sequence chose
+
 // 2b The tile selected will light up and animate
 // 2c A tone will be heard to match with the corresponding color tile
 
 // EndGame:
 // 3a If the player does not follow the sequence, the game will stop - or - If player does choose correctly the sequence should continue and add +1 random tile to the sequence until they’ve reached level 20.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // COLOR ANIMATE
 // TOP LEFT highlight and play sound when clicked
