@@ -9,7 +9,6 @@ const bottomR = document.getElementById('br');
 let computerSequence = [];
 let playerSequence = [];
 let level = 0;
-let audio = [];
 
 // INTRO SONG
 function playIntroSong() {
@@ -29,13 +28,12 @@ function startGame() {
     setTimeout(() => {
         generateSequence();
         playSequence();
-        // Call the function to generate the initial sequence
         }, 5000);
     }
 
 //GENERATE SEQUENCE
 // Function to generate a random sequence
-const computerTileEventListeners = [
+const computerEventListeners = [
     changeColorTopL,
     changeColorTopR,
     changeColorBottomL,
@@ -43,29 +41,25 @@ const computerTileEventListeners = [
   ];
   
 function generateSequence() {
-  const randomSequence = Math.floor(Math.random() * computerTileEventListeners.length);
-  // return computerTileEventListeners[randomIndex]();
+  const randomSequence = Math.floor(Math.random() * computerEventListeners.length);
   computerSequence.push(randomSequence);
   level++;
   updateLevelDisplay();
-  return computerTileEventListeners[randomSequence]();
+  // return computerEventListeners[randomSequence]();
 }
  
-//UPDATE LEVEL
+//UPDATE LEVEL DISPLAY
 function updateLevelDisplay() {
   const levelDisplay = document.querySelector('h2');
   levelDisplay.textContent = `Level: ${level} of 20`;
 }
 
 // PLAY SEQUENCE
-function playSequence() {
-  
-}
 
+ 
+//USER SEQUENCE
 
-// 1d. The sequence will continue to add +1 random tile to the sequence everytime the player chooses correctly
-  
-
+// Enable player input
 
 // Player Begin:
 // 2a Player will click a tile to match the sequence chose
@@ -94,14 +88,12 @@ function playSequence() {
 
 
 
-
-
-// COLOR ANIMATE
+// COLOR and ANIMATE
 // TOP LEFT highlight and play sound when clicked
 topL.addEventListener('click', changeColorTopL);
 
 function playToneTopL() {
-    tone1.src = '/audio/Cnote.wav'; 
+    tone1.src = '/audio/Cnote.wav';
     tone1.play();
   }
   
