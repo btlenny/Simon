@@ -1,9 +1,11 @@
 // Constants:
 const startButton = document.querySelector('#start-button')
+const levelDisplay = document.querySelector('h2');
 const topL = document.getElementById('tl');
 const topR = document.getElementById('tr');
 const bottomL= document.getElementById('bl');
 const bottomR = document.getElementById('br');
+const colors = ['tl', 'tr', 'bl', 'br'];
 
 // Variables:
 let computerSequence = [];
@@ -26,67 +28,117 @@ function startGame() {
     levelDisplay.style.visibility = 'visible'; 
     playIntroSong();
     setTimeout(() => {
-        generateSequence();
-        playSequence();
-        }, 5000);
-    }
-
-//GENERATE SEQUENCE
-// Function to generate a random sequence
-const computerEventListeners = [
-    changeColorTopL,
-    changeColorTopR,
-    changeColorBottomL,
-    changeColorBottomR,
-  ];
+    nextRound();
+    }, 5000);
+}
+    
   
-function generateSequence() {
-  const randomSequence = Math.floor(Math.random() * computerEventListeners.length);
-  computerSequence.push(randomSequence);
+// NEXT ROUND
+function nextRound(){
   level++;
-  updateLevelDisplay();
-  // return computerEventListeners[randomSequence]();
-}
- 
-//UPDATE LEVEL DISPLAY
-function updateLevelDisplay() {
-  const levelDisplay = document.querySelector('h2');
   levelDisplay.textContent = `Level: ${level} of 20`;
+  generateComputerSequence();
+  setTimeout(() => {
+    playComputerSequence();
+  }, 1000)
+  
 }
+
+//GENERATE RANDOM SEQUENCE
+function generateComputerSequence() {
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  computerSequence.push(randomColor);
+}
+
 
 // PLAY SEQUENCE
+const changeColorTone = {
+  tl: changeColorTopL,
+  tr: changeColorTopR,
+  bl: changeColorBottomL,
+  br: changeColorBottomR
+};
+function playComputerSequence() {
+  playerSequence = []; // Reset player sequence
+  let i = 0;
+  const interval = setInterval(() => {
+    const tileToHighlight = computerSequence[i];
+    changeColorTone[tileToHighlight](); // Call the corresponding function
+    i++;
+    if (i >= computerSequence.length) {
+      clearInterval(interval);
+      // Enable player input here
+    }
+  }, 1000); // Adjust the interval as needed
+}
 
+// PLAYER INPUT
+topL.addEventListener('click', () => {
+  handleTileClick('tl');
+});
+
+topR.addEventListener('click', () => {
+  handleTileClick('tr');
+});
+
+bottomL.addEventListener('click', () => {
+  handleTileClick('bl');
+});
+
+bottomR.addEventListener('click', () => {
+  handleTileClick('br');
+});
+
+function handleTileClick(tile) {
+  playerSequence.push(tile);
  
-//USER SEQUENCE
+  if (!compareSequences()) {
+      // Player made a mistake, trigger game over logic
+      alert('Wrong color! Game over.');
+      gameOver();
+  } else if (playerSequence.length === computerSequence.length) {
+      // Player completed the round
+      setTimeout(nextRound, 1000); // Delay before starting the next round
+  }
+}
 
-// Enable player input
+function compareSequences() {
+  for (let i = 0; i < playerSequence.length; i++) {
+      if (playerSequence[i] !== computerSequence[i]) {
+          return false; // Player's input doesn't match computer's sequence
+      }
+  }
+  return true; // Player's input matches computer's sequence so far
+}
 
-// Player Begin:
-// 2a Player will click a tile to match the sequence chose
+// END GAME
+function gameOver() {
+  // Implement game over logic (e.g., display a message, reset variables)
+  // You might want to show the start button again
+  startButton.classList.remove('hidden');
+  computerSequence = []; // Reset the computer's sequence
+  playerSequence = []; // Reset the player's sequence
+  level = 0; // Reset the level
+  levelDisplay.textContent = ''; // Clear the level display
+}
+function displayWinMessage() {
+  alert('Congratulations! You have won the game!');
+}
 
-// 2b The tile selected will light up and animate
-// 2c A tone will be heard to match with the corresponding color tile
-
-// EndGame:
-// 3a If the player does not follow the sequence, the game will stop - or - If player does choose correctly the sequence should continue and add +1 random tile to the sequence until they’ve reached level 20.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function nextRound() {
+  level++;
+  if (level <= 2) {
+      levelDisplay.textContent = `Level: ${level} of 20`;
+      generateComputerSequence();
+      playComputerSequence();
+  } else {
+      // Player won the game (implement win logic)
+      // Show a win message and reset the game
+      // You can also offer a replay option
+      displayWinMessage();
+      gameOver();
+  }
+}
 
 // COLOR and ANIMATE
 // TOP LEFT highlight and play sound when clicked
