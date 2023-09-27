@@ -11,6 +11,7 @@ const bottomR = document.getElementById('br');
 let computerSequence = []; 
 let playerSequence = []; 
 let level = 0; 
+let gameStarted = false;
 
 // INTRO SONG
 function playIntroSong() {
@@ -29,7 +30,8 @@ function startGame() {
     playIntroSong();
     setTimeout(() => {
         nextRound();
-    }, 5000); // Delay before starting the next round (5 seconds)
+    }, 5000);
+    gameStarted = true; 
 }
 
 // NEXT ROUND
@@ -70,26 +72,35 @@ function playComputerSequence() {
 }
 
 // PLAYER SEQUENCE
-function handleClickOnTopL (){
-  handleTileClick('tl');
-}
-topL.addEventListener('click', handleClickOnTopL);
 
-function handleClickOnTopR (){
-  handleTileClick('tlr');
-}
-topR.addEventListener('click', handleClickOnTopR);
+topL.addEventListener('click', handleTileTopLClick);
+topR.addEventListener('click', handleTileTopRClick);
+bottomL.addEventListener('click', handleTileBottomLClick);
+bottomR.addEventListener('click', handleTileBottomRClick);
 
-function handleClickOnBottomL (){
-  handleTileClick('bl');
+function handleTileTopLClick() {
+  if (gameStarted) {
+      handleTileClick('tl');
+  }
 }
-bottomL.addEventListener('click', handleClickOnBottomL);
 
-function handleClickOnBottomR (){
-  handleTileClick('br');
+function handleTileTopRClick() {
+  if (gameStarted) {
+      handleTileClick('tlr');
+  }
 }
-bottomR.addEventListener('click', handleClickOnBottomR);
 
+function handleTileBottomLClick() {
+  if (gameStarted) {
+      handleTileClick('bl');
+  }
+}
+
+function handleTileBottomRClick() {
+  if (gameStarted) {
+      handleTileClick('br');
+  }
+}
 
 function handleTileClick(tile) {
     playerSequence.push(tile); // Add the clicked tile to the player's sequence
