@@ -33,15 +33,17 @@ function startGame() {
     gameStarted = true; 
 }
 
-// NEXT ROUND
 function nextRound(){
-    level++; //Increase leve by 1
-    levelDisplay.textContent = `Level: ${level} of 14`; // Update the level display
-    generateComputerSequence(); // Generate the computer's sequence
-    playerSequence = []; // Reset player sequence
-    setTimeout(() => {
-        playComputerSequence();
-    }, 1000) // Delay before playing the computer's sequence (1 second)
+  level++; // Increase level by 1
+  levelDisplay.textContent = `Level: ${level} of 14`; // Update the level display
+  generateComputerSequence(); // Generate the computer's sequence
+  playerSequence = []; // Reset player sequence
+  setTimeout(() => {
+      playComputerSequence();
+  }, 1000); // Delay before playing the computer's sequence (1 second)
+  if (level === 3) {
+      handleWin(); // Call handleWin when the player reaches level 2
+  }
 }
 
 // GENERATE RANDOM COMPUTER SEQUENCE
@@ -69,7 +71,6 @@ function playComputerSequence() {
           setTimeout(playNextStep, 1000); // Schedule the next step after a delay of 1000 milliseconds (1 second)
       }
   }
-
   playNextStep(); // Start the sequence
 }
 
@@ -87,7 +88,7 @@ function handleTileTopLClick() {
 
 function handleTileTopRClick() {
   if (gameStarted) {
-      handleTileClick('tlr');
+      handleTileClick('tr');
   }
 }
 
@@ -116,7 +117,7 @@ function handleTileClick(tile) {
     }
 }
 
-// COMPARE PLAYER INPUTER TO COMPUTER
+// COMPARE PLAYER INPUT TO COMPUTER
 function compareSequences() {
     for (let i = 0; i < playerSequence.length; i++) {
         if (playerSequence[i] !== computerSequence[i]) {
@@ -135,22 +136,10 @@ function gameOver() {
     levelDisplay.textContent = ''; // Clear the level display
 }
 
-function displayWinMessage() {
-    alert('Congrats! You have won the game!'); // Display a win message
-}
-
 function handleWin() {
-  level++;
-  if (level <= 14) {
-      levelDisplay.textContent = `Level: ${level} of 14`;
-      generateComputerSequence();
-      playComputerSequence();
-  } else {
-      displayWinMessage();
-      gameOver();
+      alert('Congrats! You have won the game!');
+      gameOver();   
   }
-}
-
 
 // ----------------------------- ANITMATE BUTTON AND CHANGE COLOR -------------------------------//
 
