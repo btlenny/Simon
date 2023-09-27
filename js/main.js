@@ -1,20 +1,19 @@
 // Constants:
-const startButton = document.querySelector('#start-button'); // Get the start button element
-const levelDisplay = document.querySelector('h2'); // Get the level display element
-const topL = document.getElementById('tl'); // Get the top left tile element
-const topR = document.getElementById('tr'); // Get the top right tile element
-const bottomL= document.getElementById('bl'); // Get the bottom left tile element
-const bottomR = document.getElementById('br'); // Get the bottom right tile element
+const startButton = document.querySelector('#start-button');
+const levelDisplay = document.querySelector('h2');
+const topL = document.getElementById('tl'); 
+const topR = document.getElementById('tr'); 
+const bottomL= document.getElementById('bl'); 
+const bottomR = document.getElementById('br'); 
 
 
 // Variables:
-let computerSequence = []; // An array to store the computer's sequence
-let playerSequence = []; // An array to store the player's sequence
-let level = 0; // A variable to keep track of the game level
+let computerSequence = []; 
+let playerSequence = []; 
+let level = 0; 
 
 // INTRO SONG
 function playIntroSong() {
-    // Create an audio element for the intro song and play it
     const introSong = new Audio('/audio/intro.wav'); 
     introSong.play();
 }
@@ -38,19 +37,20 @@ function nextRound(){
     level++; //Increase leve by 1
     levelDisplay.textContent = `Level: ${level} of 10`; // Update the level display
     generateComputerSequence(); // Generate the computer's sequence
+    playerSequence = []; // Reset player sequence
     setTimeout(() => {
         playComputerSequence();
     }, 1000) // Delay before playing the computer's sequence (1 second)
 }
 
-// GENERATE RANDOM SEQUENCE
+// GENERATE RANDOM COMPUTER SEQUENCE
 const colors = ['tl', 'tr', 'bl', 'br']; // An array of color identifiers
 function generateComputerSequence() {
     const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Randomly select a color
     computerSequence.push(randomColor); // Add the color to the computer's sequence
 }
 
-// PLAY SEQUENCE
+// PLAY COMPUTER SEQUENCE
 const changeColorTone = {
     tl: changeColorTopL,
     tr: changeColorTopR,
@@ -58,40 +58,43 @@ const changeColorTone = {
     br: changeColorBottomR
 };
 function playComputerSequence() {
-    playerSequence = []; // Reset player sequence
-    let i = 0;
-    const interval = setInterval(() => {
-        const tileToHighlight = computerSequence[i];
-        changeColorTone[tileToHighlight](); // Call the corresponding function to highlight the tile
-        i++;
-        if (i >= computerSequence.length) {
-            clearInterval(interval);
-            // Enable player input here
+    let i = 0; // Initialize a variable to keep track of the current step in the sequence
+    const interval = setInterval(() => { // Set up an interval to execute code at regular intervals (every 1000 milliseconds or 1 second)
+        const colorToneChange = computerSequence[i]; // Get the color change to be applied at the current step in the sequence
+        changeColorTone[colorToneChange](); // Call the corresponding function to highlight the tile based on the colorToneChange
+        i++; // Move to the next step in the sequence
+        if (i >= computerSequence.length) {  // Check if we have reached the end of the computer's sequence
+            clearInterval(interval); // Stop the interval when the sequence is finished
         }
     }, 1000); // Adjust the interval as needed to control the pace of the sequence
 }
 
-// PLAYER INPUT
-topL.addEventListener('click', () => {
-    handleTileClick('tl'); // Handle a click on the top left tile
-});
+// PLAYER SEQUENCE
+function handleClickOnTopL (){
+  handleTileClick('tl');
+}
+topL.addEventListener('click', handleClickOnTopL);
 
-topR.addEventListener('click', () => {
-    handleTileClick('tr'); // Handle a click on the top right tile
-});
+function handleClickOnTopR (){
+  handleTileClick('tlr');
+}
+topR.addEventListener('click', handleClickOnTopR);
 
-bottomL.addEventListener('click', () => {
-    handleTileClick('bl'); // Handle a click on the bottom left tile
-});
+function handleClickOnBottomL (){
+  handleTileClick('bl');
+}
+bottomL.addEventListener('click', handleClickOnBottomL);
 
-bottomR.addEventListener('click', () => {
-    handleTileClick('br'); // Handle a click on the bottom right tile
-});
+function handleClickOnBottomR (){
+  handleTileClick('br');
+}
+bottomR.addEventListener('click', handleClickOnBottomR);
+
 
 function handleTileClick(tile) {
     playerSequence.push(tile); // Add the clicked tile to the player's sequence
 
-    if (!compareSequences()) {
+    if (compareSequences() === false) {
         // Player made a mistake, trigger game over logic
         alert('Wrong color! Game over.');
         gameOver();
@@ -101,6 +104,7 @@ function handleTileClick(tile) {
     }
 }
 
+// COMPARE PLAYER INPUTER TO COMPUTER
 function compareSequences() {
     for (let i = 0; i < playerSequence.length; i++) {
         if (playerSequence[i] !== computerSequence[i]) {
@@ -112,8 +116,6 @@ function compareSequences() {
 
 // END GAME
 function gameOver() {
-    // Implement game over logic (e.g., display a message, reset variables)
-    // You might want to show the start button again
     startButton.classList.remove('hidden'); // Show the start button
     computerSequence = []; // Reset the computer's sequence
     playerSequence = []; // Reset the player's sequence
@@ -132,15 +134,14 @@ function handleWin() {
       generateComputerSequence();
       playComputerSequence();
   } else {
-      // Player won the game (implement win logic)
-      // Show a win message and reset the game
-      // You can also offer a replay option
       displayWinMessage();
       gameOver();
   }
 }
 
-// COLOR and ANIMATE
+
+// ----------------------------- ANITMATE BUTTON AND CHANGE COLOR -------------------------------//
+
 // TOP LEFT highlight and play sound when clicked
 topL.addEventListener('click', changeColorTopL);
 
