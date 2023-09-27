@@ -20,7 +20,6 @@ function playIntroSong() {
 }
 
 // START BUTTON
-// Start button disappears after click and Level appears
 startButton.addEventListener('click', startGame);
 
 function startGame() {
@@ -37,7 +36,7 @@ function startGame() {
 // NEXT ROUND
 function nextRound(){
     level++; //Increase leve by 1
-    levelDisplay.textContent = `Level: ${level} of 10`; // Update the level display
+    levelDisplay.textContent = `Level: ${level} of 14`; // Update the level display
     generateComputerSequence(); // Generate the computer's sequence
     playerSequence = []; // Reset player sequence
     setTimeout(() => {
@@ -60,19 +59,21 @@ const changeColorTone = {
     br: changeColorBottomR
 };
 function playComputerSequence() {
-    let i = 0; // Initialize a variable to keep track of the current step in the sequence
-    const interval = setInterval(() => { // Set up an interval to execute code at regular intervals (every 1000 milliseconds or 1 second)
-        const colorToneChange = computerSequence[i]; // Get the color change to be applied at the current step in the sequence
-        changeColorTone[colorToneChange](); // Call the corresponding function to highlight the tile based on the colorToneChange
-        i++; // Move to the next step in the sequence
-        if (i >= computerSequence.length) {  // Check if we have reached the end of the computer's sequence
-            clearInterval(interval); // Stop the interval when the sequence is finished
-        }
-    }, 1000); // Adjust the interval as needed to control the pace of the sequence
+  let i = 0; // Initialize a variable to keep track of the current step in the sequence
+
+  function playNextStep() {
+      if (i < computerSequence.length) {
+          const colorToneChange = computerSequence[i]; // Get the color change to be applied at the current step in the sequence
+          changeColorTone[colorToneChange](); // Call the corresponding function to highlight the tile based on the colorToneChange
+          i++; // Move to the next step in the sequence
+          setTimeout(playNextStep, 1000); // Schedule the next step after a delay of 1000 milliseconds (1 second)
+      }
+  }
+
+  playNextStep(); // Start the sequence
 }
 
 // PLAYER SEQUENCE
-
 topL.addEventListener('click', handleTileTopLClick);
 topR.addEventListener('click', handleTileTopRClick);
 bottomL.addEventListener('click', handleTileBottomLClick);
@@ -107,7 +108,7 @@ function handleTileClick(tile) {
 
     if (compareSequences() === false) {
         // Player made a mistake, trigger game over logic
-        alert('Wrong color! Game over.');
+        alert('Oops! Game over.');
         gameOver();
     } else if (playerSequence.length === computerSequence.length) {
         // Player completed the round
@@ -135,13 +136,13 @@ function gameOver() {
 }
 
 function displayWinMessage() {
-    alert('Congratulations! You have won the game!'); // Display a win message
+    alert('Congrats! You have won the game!'); // Display a win message
 }
 
 function handleWin() {
   level++;
-  if (level <= 10) {
-      levelDisplay.textContent = `Level: ${level} of 20`;
+  if (level <= 14) {
+      levelDisplay.textContent = `Level: ${level} of 14`;
       generateComputerSequence();
       playComputerSequence();
   } else {
