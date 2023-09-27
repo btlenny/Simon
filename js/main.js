@@ -15,7 +15,7 @@ let gameStarted = false;
 
 // INTRO SONG
 function playIntroSong() {
-    const introSong = new Audio('/audio/intro.wav'); 
+    const introSong = new Audio('audio/intro.wav'); 
     introSong.play();
 }
 
@@ -157,7 +157,7 @@ function handleWin() {
 topL.addEventListener('click', changeColorTopL);
 
 function playToneTopL() {
-    tone1.src = '/audio/Cnote.wav';
+    tone1.src = 'audio/Cnote.wav';
     tone1.play();
   }
   
@@ -176,7 +176,7 @@ function changeColorTopL() {
 topR.addEventListener('click', changeColorTopR);
 
 function playToneTopR() {
-    tone2.src = '/audio/Enote.wav';
+    tone2.src = 'audio/Enote.wav';
     tone2.play();
   }
 
@@ -194,7 +194,7 @@ function changeColorTopR() {
 //BOTTOM LEFT highlight and play sound when clicked
 bottomL.addEventListener('click', changeColorBottomL);
 function playToneBottomL() {
-    tone3.src = '/audio/Gnote.wav';
+    tone3.src = 'audio/Gnote.wav';
     tone3.play();
   }
 
@@ -212,7 +212,7 @@ function changeColorBottomL() {
 // BOTTOM RIGHT highlight and play sound when clicked
 bottomR.addEventListener('click', changeColorBottomR);
 function playToneBottomR() {
-    tone4.src = '/audio/Bnote.wav'; 
+    tone4.src = 'audio/Bnote.wav'; 
     tone4.play();
   }
   
