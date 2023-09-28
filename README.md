@@ -4,8 +4,8 @@ I've been dabbiling in synthesizers and picked up one recently that'ss a modern 
 
 # Screenshot
 
-<img src="images/Screenshot.png">
-<img src="images/Juno60.jpeg">
+<img src="../images/Screenshot.png">
+<img src="../images/Juno60.jpeg">
 
 # Technologies Used
 
