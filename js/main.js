@@ -41,7 +41,7 @@ function nextRound(){
   setTimeout(() => {
       playComputerSequence();
   }, 1000); // Delay before playing the computer's sequence (1 second)
-  if (level === 3) {
+  if (level === 15) {
       handleWin(); // Call handleWin when the player reaches level 2
   }
 }
