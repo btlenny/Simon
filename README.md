@@ -1,6 +1,6 @@
  
 # What is SINE-MON?
-<p>SINE-MON is an iteration of the classic game "Simon". The goal of Simon is to repeat a series of colors and sounds that the game presents to you for as long as you can. The game becomes progressively more difficult as you successfully complete each level.I hope you enjoy this take on Simon!</p>
+<p>SINE-MON is an iteration of the classic game "Simon". The goal of Simon is to repeat a series of colors and sounds that the game presents to you for as long as you can. The game becomes progressively more difficult as you successfully complete each level. I hope you enjoy this take on Simon!</p>
 <img src="Images/Screenshot.png">
 
 # Inspiration

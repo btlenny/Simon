@@ -23,34 +23,34 @@ function playIntroSong() {
 startButton.addEventListener('click', startGame);
 
 function startGame() {
-    startButton.classList.add('hidden'); // Hide the start button
-    const levelDisplay = document.querySelector('h2'); // Get the level display DOM
-    levelDisplay.style.visibility = 'visible'; // Make the level display visible
+    startButton.classList.add('hidden'); 
+    const levelDisplay = document.querySelector('h2'); 
+    levelDisplay.style.visibility = 'visible';
     playIntroSong();
     setTimeout(() => {
         nextRound();
     }, 5000);
     gameStarted = true; 
 }
-
+//NEXT ROUND
 function nextRound(){
-  level++; // Increase level by 1
-  levelDisplay.textContent = `Level: ${level} of 14`; // Update the level display
-  generateComputerSequence(); // Generate the computer's sequence
-  playerSequence = []; // Reset player sequence
+  level++; 
+  levelDisplay.textContent = `Level: ${level} of 14`; 
+  generateComputerSequence(); 
+  playerSequence = []; 
   setTimeout(() => {
       playComputerSequence();
-  }, 1000); // Delay before playing the computer's sequence (1 second)
+  }, 1000); 
   if (level === 15) {
-      handleWin(); // Call handleWin when the player reaches level 2
+      handleWin(); 
   }
 }
 
 // GENERATE RANDOM COMPUTER SEQUENCE
-const colors = ['tl', 'tr', 'bl', 'br']; // An array of color identifiers
+const colors = ['tl', 'tr', 'bl', 'br']; // 
 function generateComputerSequence() {
-    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Randomly select a color
-    computerSequence.push(randomColor); // Add the color to the computer's sequence
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // 
+    computerSequence.push(randomColor); 
 }
 
 // PLAY COMPUTER SEQUENCE
@@ -61,17 +61,17 @@ const changeColorTone = {
     br: changeColorBottomR
 };
 function playComputerSequence() {
-  let i = 0; // Initialize a variable to keep track of the current step in the sequence
+  let i = 0; 
 
   function playNextStep() {
       if (i < computerSequence.length) {
-          const colorToneChange = computerSequence[i]; // Get the color change to be applied at the current step in the sequence
-          changeColorTone[colorToneChange](); // Call the corresponding function to highlight the tile based on the colorToneChange
-          i++; // Move to the next step in the sequence
-          setTimeout(playNextStep, 1000); // Schedule the next step after a delay of 1000 milliseconds (1 second)
+          const colorToneChange = computerSequence[i]; 
+          changeColorTone[colorToneChange](); 
+          i++; 
+          setTimeout(playNextStep, 1000); 
       }
   }
-  playNextStep(); // Start the sequence
+  playNextStep();
 }
 
 // PLAYER SEQUENCE
@@ -105,15 +105,13 @@ function handleTileBottomRClick() {
 }
 
 function handleTileClick(tile) {
-    playerSequence.push(tile); // Add the clicked tile to the player's sequence
+    playerSequence.push(tile);
 
     if (compareSequences() === false) {
-        // Player made a mistake, trigger game over logic
         alert('Oops! Game over.');
         gameOver();
     } else if (playerSequence.length === computerSequence.length) {
-        // Player completed the round
-        setTimeout(nextRound, 1000); // Delay before starting the next round
+        setTimeout(nextRound, 1000); 
     }
 }
 
@@ -121,19 +119,19 @@ function handleTileClick(tile) {
 function compareSequences() {
     for (let i = 0; i < playerSequence.length; i++) {
         if (playerSequence[i] !== computerSequence[i]) {
-            return false; // Player's input doesn't match computer's sequence
+            return false;
         }
     }
-    return true; // Player's input matches computer's sequence so far
+    return true;
 }
 
 // END GAME
 function gameOver() {
-    startButton.classList.remove('hidden'); // Show the start button
-    computerSequence = []; // Reset the computer's sequence
-    playerSequence = []; // Reset the player's sequence
-    level = 0; // Reset the level
-    levelDisplay.textContent = ''; // Clear the level display
+    startButton.classList.remove('hidden');
+    computerSequence = []; 
+    playerSequence = []; 
+    level = 0; 
+    levelDisplay.textContent = '';
 }
 
 function handleWin() {
