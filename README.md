@@ -12,7 +12,6 @@ I've been dabbiling in synthesizers and picked up one recently that'ss a modern 
 - JavaScript
 - HTML
 - CSS
-- Logic Pro X
 
 # Getting Started
 
