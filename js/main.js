@@ -1,11 +1,11 @@
-// Constants:
+// CONSTANTS
 const startButton = document.querySelector('#start-button');
 const levelDisplay = document.querySelector('h2');
 const topL = document.getElementById('tl');
 const topR = document.getElementById('tr');
 const bottomL = document.getElementById('bl');
 const bottomR = document.getElementById('br');
-// Variables:
+// VARIABLES
 let computerSequence = [];
 let playerSequence = [];
 let level = 0;
@@ -28,7 +28,7 @@ function startGame() {
 	}, 5000);
 	gameStarted = true;
 }
-//NEXT ROUND
+// NEXT ROUND
 function nextRound() {
 	level++;
 	levelDisplay.textContent = `Level: ${level} of 14`;
@@ -48,7 +48,7 @@ function generateComputerSequence() {
 	computerSequence.push(randomColor);
 }
 // PLAY COMPUTER SEQUENCE
-const changeColorTone = {
+const triggerTileAnimate = {
 	tl: changeColorTopL,
 	tr: changeColorTopR,
 	bl: changeColorBottomL,
@@ -61,7 +61,7 @@ function playComputerSequence() {
 	function playNextStep() {
 		if (i < computerSequence.length) {
 			const colorToneChange = computerSequence[i];
-			changeColorTone[colorToneChange]();
+			triggerTileAnimate[colorToneChange]();
 			i++;
 			setTimeout(playNextStep, 1000);
 		}
