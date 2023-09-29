@@ -32,3 +32,4 @@ Link to live build: https://btlenny.github.io/Simon/
 - Adding in a volume button 
 - Adding a button that let's play choose the difficulty of the game, rather then always going to 14
 - Potentially add something a bit more fun for a rin message. Maybe a song or a graphic
+- Cleanup JS so that the button click animations are moved and called from my CSS
