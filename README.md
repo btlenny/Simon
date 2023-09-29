@@ -28,8 +28,9 @@ Link to live build: https://btlenny.github.io/Simon/
 
 # Next Steps
 
-- If a player clicks to quickly it will say you lost. I will update so that even the fastest players won't have issue
-- Adding in a volume button 
-- Adding a button that let's play choose the difficulty of the game, rather then always going to 14
+- Fix if a player clicks to quickly it will say you lost. I will update so that even the fastest players won't have issue
+- Fix if you select the wrong tile, after clicking the alert, it will play the tile tone
+- Add in a volume button 
+- Add a button that let's play choose the difficulty of the game, rather then always going to 14
 - Potentially add something a bit more fun for a rin message. Maybe a song or a graphic
 - Cleanup JS so that the button click animations are moved and called from my CSS
