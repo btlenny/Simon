@@ -68,7 +68,7 @@ function playComputerSequence() {
 	}
 	playNextStep();
 }
-// PLAYER SEQUENCE
+//PLAYER TILE SELECTION
 topL.addEventListener('click', handleTileTopLClick);
 topR.addEventListener('click', handleTileTopRClick);
 bottomL.addEventListener('click', handleTileBottomLClick);
@@ -97,7 +97,7 @@ function handleTileBottomRClick() {
 		handleTileClick('br');
 	}
 }
-
+//PLAYER SEQUENCE AND COMPARE INPUT TO COMPUTER
 function handleTileClick(tile) {
 	playerSequence.push(tile);
 	if (compareSequences() === false) {
@@ -107,7 +107,7 @@ function handleTileClick(tile) {
 		setTimeout(nextRound, 1000);
 	}
 }
-// COMPARE PLAYER INPUT TO COMPUTER
+
 function compareSequences() {
 	for (let i = 0; i < playerSequence.length; i++) {
 		if (playerSequence[i] !== computerSequence[i]) {
